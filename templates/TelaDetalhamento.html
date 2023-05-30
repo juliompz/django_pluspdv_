@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title%}Detalhamento{% endblock %}
+
+{% block css %} 
+<link rel="stylesheet" href="{% static 'css/TelaDetalhamento.css' %}"> 
+<link rel="stylesheet" href="{% static 'css/TelaCaixa.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="app">
+    <div class="container-telacaixa">
+        <header>
+            <div class="img-seta">
+                <a href="/">
+                    <img src="{% static 'assets/img/Vector.svg' %}" alt="Seta para voltar uma pagina">
+                </a>
+            </div>
+                <p class="header-title">Detalhamento caixa 1</p>
+    </header>
+    
+    <section class="detailbox-area">
+    
+        <div class="detail-box">
+            <div class="detail-box-title">
+                <p>8 Contas recebidas</p>
+            </div>
+            <div class="detail-box-value">
+                <p>R$1.500</p>
+            </div> 
+        </div>
+    
+        <div class="detail-box">
+            <div class="detail-box-title">
+                <p>12 Entradas</p>
+            </div>
+            <div class="detail-box-value">
+                <p>R$1.500</p>
+            </div> 
+        </div>
+    
+        <div class="detail-box">
+            <div class="detail-box-title">
+                <p>3 Saídas</p>
+            </div>
+            <div class="detail-box-value">
+                <p>R$300</p>
+            </div> 
+        </div>
+    
+    </section>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

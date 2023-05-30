@@ -1,0 +1,183 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/TelaHome.css' %}">
+<link rel="stylesheet" href="{% static 'css/TelaCaixa.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<div id="app">
+    <div class="container-telacaixa">
+
+        <!-- CABEÇALHO -->
+    <header>
+        
+        <a href="/">
+            <img src="{% static 'assets/img/Vector.svg' %}" alt="Seta para voltar uma pagina">
+        </a>
+    
+        <p class="header-title">Caixa diário</p>
+    </header>
+    
+    <!--Gráfico de vendas-->
+    
+    <section class="graphic-area">
+    <div style="width: 165px; height: 165px;">
+        <canvas id="usersChart" width="1" height="1"></canvas>
+        <span id="chartText"></span>
+    </div>
+    
+    <div class="graphic-text">
+        <span class="legend">
+            <span class="color_money"></span>
+            <p>Dinheiro</p>
+        </span>
+    
+        <span class="legend">
+            <span class="color_card"></span>
+            <p>Cartao</p>
+        </span>
+    
+        <span class="legend">
+            <span class="color_check"></span>
+            <p>Cheque</p>
+        </span>
+    
+        <span class="legend">
+            <span class="color_pix"></span>
+            <p>PIX</p>
+        </span>
+    </div>
+    </section>
+    
+    <!--END GRAFICO DE VENDAS-->
+    
+    <!--Resumo-->
+    
+    <section class="theresume">
+    <div class="resume-title">
+        <p>Resumo total</p>
+    </div>
+    <div class="box-area">
+        <div class="resume-box">
+            <p class="box-title">Vendas</p>
+            <p class="box-value">R$ 50,00</p>
+        </div>
+        
+        <div class="resume-box">
+            <p class="box-title">Recebimentos</p>
+            <p class="box-value">R$ 50,00</p>
+        </div>
+    
+        <div class="resume-box">
+            <p class="box-title">Entradas</p>
+            <p class="box-value">R$ 50,00</p>
+        </div>
+    
+        <div class="resume-box">
+            <p class="box-title">Caixa</p>
+            <p class="box-value">R$ 50,00</p>
+        </div>
+    
+    </div>
+    </section>
+    
+    <!-- END RESUMO -->
+    
+    <!-- CAIXAS -->
+    
+    <section class="thecashier">
+    <div class="cashier-title">
+        <p>Caixas</p>
+    </div>
+    
+    <div class="cashier-box-area">
+        <a href="{% url 'tela-detalhamento' %}" class="router-link">
+            <div class="cashier-box">
+                <div class="cashier-box-img">
+                    <img src="{% static 'assets/img/caixaimg.svg' %}" alt="icon caixa-supermercado">
+                </div>
+                <div class="cashier-box-title">
+                    <p>Caixa 1</p>
+                </div>
+                <div class="cashier-box-value">
+                    <p>R$1.500</p>
+                </div>
+            </div>            
+        </a>
+    
+        <a href="{% url 'tela-detalhamento' %}" class="router-link">
+            <div class="cashier-box">
+                <div class="cashier-box-img">
+                    <img src="{% static 'assets/img/caixaimg.svg' %}" alt="icon caixa-supermercado">
+                </div>
+                <div class="cashier-box-title">
+                    <p>Caixa 2</p>
+                </div>
+                <div class="cashier-box-value">
+                    <p>R$1.500</p>
+                </div>
+            </div>            
+        </a>
+    
+        <a href="{% url 'tela-detalhamento' %}" class="router-link">
+            <div class="cashier-box">
+                <div class="cashier-box-img">
+                    <img src="{% static 'assets/img/caixaimg.svg' %}" alt="icon caixa-supermercado">
+                </div>
+                <div class="cashier-box-title">
+                    <p>Caixa 3</p>
+                </div>
+                <div class="cashier-box-value">
+                    <p>R$1.500</p>
+                </div>
+            </div>            
+        </a>
+    
+        <a href="{% url 'tela-detalhamento' %}" class="router-link">
+            <div class="cashier-box">
+                <div class="cashier-box-img">
+                    <img src="{% static 'assets/img/caixaimg.svg' %}" alt="icon caixa-supermercado">
+                </div>
+                <div class="cashier-box-title">
+                    <p>Caixa 4</p>
+                </div>
+                <div class="cashier-box-value">
+                    <p>R$1.500</p>
+                </div>
+            </div>            
+        </a>
+    
+        <a href="{% url 'tela-detalhamento' %}" class="router-link">
+            <div class="cashier-box">
+                <div class="cashier-box-img">
+                    <img src="{% static 'assets/img/caixaimg.svg' %}" alt="icon caixa-supermercado">
+                </div>
+                <div class="cashier-box-title">
+                    <p>Caixa 5</p>
+                </div>
+                <div class="cashier-box-value">
+                    <p>R$1.500</p>
+                </div>
+            </div>            
+        </a>
+    
+    </div>
+    </section>
+    {% include 'partials/__footer.html' %}
+    
+    <script src="https://github.com/chartjs/Chart.js/releases/download/v2.9.3/Chart.min.js"></script>
+    <script src="{% static 'js/TelaHome.js' %}"></script>
+    
+    </div>
+</div>
+
+
+    
+    
+
+{% endblock %}

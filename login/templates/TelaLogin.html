@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block css %} 
+
+<link rel="stylesheet" href="{% static 'css/Login.css' %}">
+{% endblock%}
+
+{% block title%}Login{% endblock %}
+{% block content %}
+
+<div id="login">
+    <header>
+        <img src="{% static 'assets/logo_pluspdv.svg' %}" alt="">
+    </header>
+
+    <div v-if="mostrarFormularioCnpj" class="entrada-cnpj">
+        <form @submit.prevent="fetchEmpresa">
+          <input v-model="cnpj" type="text" placeholder="Digite o CNPJ" required>
+          <button type="submit">Avançar</button>
+        </form>
+    </div>
+
+
+    <div v-if="mostrarFormularioLogin" class="entrada-login-usuario">
+        <form @submit.prevent="fetchLoginUser">
+          <input type="text" placeholder="Digite o CPF" v-model="cpf" required>
+          <input type="password" placeholder="Senha" v-model="password" required>
+          <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <div v-if="mostrarUltimoLogin">
+        <div class="empresa-info" @click="FazerLoginNovamente">
+            <div class="empresa-info-img">
+                <img src="{% static 'assets/icon_img_empresa.svg' %}" alt=" icone empresa">
+            </div>
+    
+            <div class="empresa-info-text" >
+                <p class="empresa-text-name">${empresa_nome}</p>
+                <p class="empresa-text-cnpj">CNPJ: ${cnpjFormatado}</p>
+            </div>
+        </div>
+    
+
+        <div class="trocar-empresa"  @click="TrocarEmpresa">
+            <img src="{% static 'assets/icon_seta_back.svg' %}" alt="seta trocar empresa">
+            <p>Trocar empresa</p>
+        </div>
+    </div>
+    
+    <footer>
+        <img src="{% static 'assets/infog2_banner.svg' %}" alt="">
+    </footer>
+</div>
+
+<script src="{% static 'js/Login.js' %}"></script>
+{% endblock %}

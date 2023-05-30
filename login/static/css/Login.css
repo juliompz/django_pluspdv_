@@ -1,0 +1,179 @@
+html{
+    background-image: url("../assets/image_fundo_login.svg");
+    height: 100%;
+    
+}
+
+body{
+    height: 100%;
+    background: linear-gradient(0deg, rgba(10, 65, 148, 0.82) 0%, rgba(10, 65, 148, 0) 55.16%);
+}
+
+header img{
+    margin: 30px 20px;
+}
+
+footer{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    position: fixed;
+    bottom:25px;
+    left:142px;
+}
+
+
+.container-login{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+/* PARTE DA ENTRADA  CNPJ*/
+
+.entrada-cnpj{
+    margin-top: 208px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+}
+
+.entrada-cnpj input{
+    width: 353px;
+    height: 46px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+.entrada-cnpj input::placeholder{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: #1E1E1E80 50%;
+
+}
+
+.entrada-cnpj button{
+    margin-top: 23px;
+    width: 353px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: #0094FF;
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFFFFF;
+    box-shadow: none;
+    border: none;
+}
+
+/* ENTRADA LOGIN USUARIO CPF E SENHA*/
+
+.entrada-login-usuario{
+    margin-top: 208px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+}
+
+.entrada-login-usuario input{
+    width: 353px;
+    height: 46px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    margin-bottom: 10px;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+.entrada-login-usuario input::placeholder{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: #1E1E1E80 50%;
+}
+
+.entrada-login-usuario button{
+    margin-top: 47px;
+    width: 353px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: #0094FF;
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFFFFF;
+    box-shadow: none;
+    border: none;
+}
+
+/* Area empresa*/
+.empresa-info{
+    display: flex;
+    background-color: #FFFFFF;
+    width: 337px;
+    height: 80px;
+    border-radius: 7px;
+    margin-top: 240px;
+    margin-left: 28px;
+}
+
+/* IMAGEM AO LADO DO NOME E CNPJ*/
+.empresa-info-img{
+    margin-top: 17px;
+    margin-left: 13px;
+    width: 46px;
+    height: 46px;
+    text-align: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #FD8181;
+    margin-right: 10px;
+}
+
+.empresa-info-img img{
+    margin-top: 12px;
+
+}
+
+.area-img{
+    display: flex;
+
+}
+
+/* TEXTO NOME E CNPJ*/
+.empresa-info-text{
+    width: 198px;
+    height: 48px;
+    margin-top: 16px;
+}
+
+.empresa-info-text p {
+    margin: 0;
+}
+p.empresa-text-name {
+    font-weight: 700;
+}
+
+p.empresa-text-cnpj{
+    font-weight: 400;
+    width: 210px;
+    font-size: 16px;
+}
+
+/* PARTE TROCAR EMPRESA */
+
+.trocar-empresa{
+    display: flex;
+    color: #FFFFFF;
+    margin-left: 120px;
+}
+
+.trocar-empresa p {
+    margin-left: 5px
+}

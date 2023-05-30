@@ -1,0 +1,199 @@
+
+/* GRAFICO CSS */
+
+:root{
+    --color_money: #0094FF;
+    --color_card: #0670BC;
+    --color_check: #2B4B88;
+    --color_pix: #05426D;
+}
+
+
+.graphic-area{
+    display: flex;
+}
+
+
+.total-text{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.total-text-price{
+    font-weight: 700;
+    margin-top: -25px;
+    font-size: 20px;
+}
+
+.graphic-text{
+    margin-left: 60px;
+    margin-top: 50px;
+    height: 50%;
+}
+.graphic-text p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.legend{
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.legend p{
+font-weight: 400;
+font-size: 11px;
+}
+
+[class^="color_"]{
+    width: 12px;
+    height: 12px;
+    background-color: var(--color_money);
+    margin-right: 8px;
+    border-radius: 3px;
+}
+
+.color_card{
+    background-color: var(--color_card);
+}
+
+.color_check{
+    background-color: var(--color_check);
+}
+
+.color_pix{
+    background-color: var(--color_pix);
+}
+
+/* END GRAFICO */
+
+/* RESUMO CSS */
+
+
+.box-area{
+    display: flex;
+    overflow-x: scroll;
+    margin-top: -15px;
+}
+.box-area::-webkit-scrollbar {
+display: none;
+}
+
+.resume-title p {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.resume-box{
+    display: flex;
+    background-color: #0670BC;
+    color: #FFFFFF;
+    min-width: 105px;
+    height: 90px;
+    border-radius: 9px;
+    text-align: center;
+    flex-direction: column;
+    margin-right: 10px;
+    
+}
+
+.resume-box .box-title{
+    font-size: 16px;
+}
+
+.resume-box:nth-of-type(2) .box-title {
+font-size: 13px;
+margin-top: 20px;
+margin-bottom: 16px;
+}
+
+.box-value{
+    font-weight: bold;
+    margin-top: -10px;
+}
+
+/* END RESUMO */
+
+/* CAIXA CSS */
+
+.thecashier{
+    display: flex;
+    flex-direction: column;
+}
+
+.cashier-title{
+    display: block;
+}
+
+.cashier-title p{
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 30px;
+    margin-top: 27px;
+}
+
+.cashier-box-area{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 350px;
+    margin-right: 20px;
+    margin-top: -10px;
+}
+
+.cashier-box-area::-webkit-scrollbar {
+display: none;
+}
+
+.cashier-box{
+    display: flex;
+    background: rgba(6, 112, 188, 0.13);
+    border-radius: 9px;
+    margin-bottom: 20px;
+    width: 352px;
+    height: 63px;
+}
+
+.cashier-box-img{
+    width: 50px;
+    margin-left: 10px;
+}
+
+.cashier-box-img img {
+    margin-top: 23px;
+}
+
+.cashier-box .cashier-box-title{
+    display: flex;
+    width: 190px;
+    align-items: center;
+}
+
+.cashier-box-title p{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    width: 64px;
+    height: 24px;
+    
+}
+
+.cashier-box .cashier-box-value{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 110px;
+}
+
+.cashier-box .cashier-box-value p{
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 15px;
+}
+

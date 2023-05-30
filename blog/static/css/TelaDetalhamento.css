@@ -1,0 +1,41 @@
+.detailbox-area{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.detail-box{
+    display: flex;
+    background: rgba(6, 112, 188, 0.13);
+    border-radius: 9px;
+    margin-bottom: 20px;
+    width: 352px;
+    height: 63px;
+}
+
+.detail-box-title{
+    display: flex;
+    width: 250px;
+    align-items: center;
+}
+
+.img-seta{
+    display: flex;
+
+}
+
+.detail-box-title p{
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.detail-box-value {
+    display: flex;
+    align-items: center;
+    width: 80px;
+}
+
+.detail-box-value p{
+    font-weight: 700;
+    font-size: 20px;
+}

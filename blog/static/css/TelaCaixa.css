@@ -1,0 +1,84 @@
+
+.container-telacaixa{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    width: 100%;
+  }
+  
+  .router-link {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  /* HEADER CSS */
+  
+  header {
+    display: flex;
+    margin-bottom: 7px;
+    height: 60px;
+  }
+  
+  .items-header{
+    display: flex;
+  }
+  header img {
+    margin-top: 25px;
+    position: absolute;
+  }
+  
+  .text-area{
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: 50px;
+  }
+  
+  .header-title{
+    font-weight: 500;
+    font-size: 20px;
+    margin: 20px auto;
+  }
+  
+  /* END HEADER */
+  
+  /* FOOTER CSS */
+  
+  footer {
+    display: flex;
+    margin-top: 35px;
+    z-index: 1001;
+      bottom: 18px;
+      position: fixed;
+      background: white;
+      padding-top: 10px;
+      width: 100%;
+  }
+  
+  
+  footer img {
+    padding: 0;
+    width: 24px;
+  }
+  
+  footer img:nth-of-type(4){
+    width: 28px;
+  }
+  
+  
+  .footer-item{
+    display: flex;
+    margin-right: 22px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  
+  }
+  
+  .footer-item p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-top: 0;
+    opacity: 70%;
+  }
+  
+  /* END FOOTER */
