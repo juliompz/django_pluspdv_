@@ -1,11 +1,11 @@
 
-
 const app = new Vue({
     el: '#login',
     delimiters: ['${', '}'],
     data: {
         // AREA EMPRESA
         cnpj:'',
+        storeId: '',
         cnpjteste: '',
         cnpj_error: false,
         empresa_nome:'',
@@ -28,9 +28,9 @@ const app = new Vue({
     },
     computed: {
         cnpjFormatado(){
-            if (this.cnpj) {
+            if (this.storeId) {
                 // Remove todos os caracteres não numéricos
-                const cnpjNumerico = this.cnpj.replace(/\D/g, '');
+                const cnpjNumerico = this.storeId.replace(/\D/g, '');
         
                 // Aplica a formatação desejada: XX.XXX.XXX/YYYY-ZZ
                 const cnpjFormatado = cnpjNumerico.replace(
@@ -46,7 +46,7 @@ const app = new Vue({
     watch: {
     },
     methods:{
-       /*
+       
         formatarCNPJ(){
             const cnpjParaFormatar = this.cnpj.replace(/\D/g, '') // Remover caracteres não numéricos
             .replace(/(\d{2})(\d)/, '$1.$2') // Colocar ponto após os primeiros dois dígitos
@@ -58,10 +58,8 @@ const app = new Vue({
             this.cnpj = cnpjParaFormatar;
             this.cnpjNaoFormatado = this.cnpj.replace(/\D/g, ''); // Salvar valor sem formatação
         },
-        */
-
+        
         //FUNCAO PARA FORMATAR CPF
-        /*
         formatarCPF() {
 
             const cpfParaFormatar = this.cpf.replace(/\D/g, '') // Remover caracteres não numéricos
@@ -73,9 +71,9 @@ const app = new Vue({
             this.cpf = cpfParaFormatar;
             this.cpfNaoFormatado = this.cpf.replace(/\D/g, ''); // Salvar valor sem formatação
           },
-          */
+          
         fetchEmpresa(){
-            axios.get(`http://concentrador.pluspdv.com.br:51000/${this.cnpj}`)
+            axios.get(`http://concentrador.pluspdv.com.br:51000/${this.cnpjNaoFormatado}`)
             .then(response => {
                 console.log(response.data)
                 this.base_url = `http://${response.data.api_url}:${response.data.api_port}`
@@ -83,25 +81,29 @@ const app = new Vue({
                 console.log(this.base_url)
                 this.mostrarFormularioCnpj = false
                 this.mostrarFormularioLogin = true
+                this.storeId = response.data.company_cnpj
+                const cnpjNaoFormatado = this.cnpj.replace(/\D/g, '');
+
                 localStorage.setItem('empresa_nome', this.empresa_nome)
-                localStorage.setItem('empresa_cnpj', this.cnpj)
+                localStorage.setItem('empresa_cnpj', this.cnpjNaoFormatado)
                 localStorage.setItem('base_url', this.base_url)
             })
             //Tratando erros ( 404 - Não encontrado )
             .catch(error =>{
                 console.log(error)
+                console.log(this.cnpj)
+                console.log(this.cnpjNaoFormatado)
                 if (error.response.status === 404){
                     this.cnpj_error = true
                     this.cnpj = ''
-                    
                 }
             })
         },
         fetchLoginUser(){
             const params = {
                 app_id: 'PlusPdvApp',
-                store_id: this.cnpj,
-                login: this.cpf,
+                store_id: this.storeId,
+                login: this.cpfNaoFormatado,
                 password: this.password
             };
             axios.post(`${this.base_url}/api/Login`, params)
@@ -161,10 +163,11 @@ const app = new Vue({
         const storedEmpresaCnpj = localStorage.getItem('empresa_cnpj');
         if (storedEmpresaNome && storedEmpresaCnpj) {
             this.empresa_nome = storedEmpresaNome;
-            this.cnpj = storedEmpresaCnpj
+            this.storeId = storedEmpresaCnpj
             this.mostrarFormularioCnpj = false;
             this.mostrarFormularioLogin = false;
             this.mostrarUltimoLogin = true;
           }
     }
 });
+
