@@ -4,15 +4,27 @@ const app = new Vue({
     el: '#login',
     delimiters: ['${', '}'],
     data: {
+        // AREA EMPRESA
         cnpj:'',
+        cnpjteste: '',
+        cnpj_error: false,
         empresa_nome:'',
+        base_url:'',
         mostrarFormularioCnpj: true,
+        cnpjNaoFormatado: '',
+        // 
+        // AREA LOGIN USUARIO
+        cpf:'',
+        cpfNaoFormatado:'',
+        login_error: false,
         mostrarFormularioLogin: false,
         mostrarUltimoLogin: false,
-        cpf:'',
         password:'',
         token:'',
-        base_url:'',
+        tentativa_login: 0,
+        entrar_em_contato: false
+        // 
+
     },
     computed: {
         cnpjFormatado(){
@@ -34,6 +46,34 @@ const app = new Vue({
     watch: {
     },
     methods:{
+       /*
+        formatarCNPJ(){
+            const cnpjParaFormatar = this.cnpj.replace(/\D/g, '') // Remover caracteres não numéricos
+            .replace(/(\d{2})(\d)/, '$1.$2') // Colocar ponto após os primeiros dois dígitos
+            .replace(/(\d{3})(\d)/, '$1.$2') // Colocar ponto após os próximos três dígitos
+            .replace(/(\d{3})(\d)/, '$1/$2') // Colocar barra após os próximos três dígitos
+            .replace(/(\d{4})(\d)/, '$1-$2') // Colocar hífen após os próximos quatro dígitos
+            .substring(0, 18); // Limitar o tamanho máximo do CNPJ
+
+            this.cnpj = cnpjParaFormatar;
+            this.cnpjNaoFormatado = this.cnpj.replace(/\D/g, ''); // Salvar valor sem formatação
+        },
+        */
+
+        //FUNCAO PARA FORMATAR CPF
+        /*
+        formatarCPF() {
+
+            const cpfParaFormatar = this.cpf.replace(/\D/g, '') // Remover caracteres não numéricos
+            .replace(/(\d{3})(\d)/, '$1.$2') // Colocar ponto após os primeiros três dígitos
+            .replace(/(\d{3})(\d)/, '$1.$2') // Colocar ponto após os próximos três dígitos
+            .replace(/(\d{3})(\d)/, '$1-$2') // Colocar hífen após os próximos três dígitos
+            .substring(0, 14); // Limitar o tamanho máximo do CPF
+
+            this.cpf = cpfParaFormatar;
+            this.cpfNaoFormatado = this.cpf.replace(/\D/g, ''); // Salvar valor sem formatação
+          },
+          */
         fetchEmpresa(){
             axios.get(`http://concentrador.pluspdv.com.br:51000/${this.cnpj}`)
             .then(response => {
@@ -47,8 +87,14 @@ const app = new Vue({
                 localStorage.setItem('empresa_cnpj', this.cnpj)
                 localStorage.setItem('base_url', this.base_url)
             })
+            //Tratando erros ( 404 - Não encontrado )
             .catch(error =>{
                 console.log(error)
+                if (error.response.status === 404){
+                    this.cnpj_error = true
+                    this.cnpj = ''
+                    
+                }
             })
         },
         fetchLoginUser(){
@@ -63,11 +109,27 @@ const app = new Vue({
                 console.log(response.data)
                 console.log('ENTROU NA API')
                 this.token = response.data.token
+
                 //this.fetchDadosAutenticados()
             })
             .catch(error => {
                 console.log(error)
+                // TRATANDO ERRO QUANDO LOGIN INVALIDO - ERROR 401
+                if(error.response.status === 401){
+                    this.login_error = true
+                    this.cpf = ''
+                    this.password = ''
+                }
             })
+        },
+        BotaoLogin(){
+            if(this.login_error = true){
+                this.tentativa_login++
+            }
+            console.log(this.tentativa_login)
+            if(this.tentativa_login >=2){
+                this.entrar_em_contato = true
+            }
         },
         TrocarEmpresa(){
             localStorage.removeItem('empresa_nome');
@@ -80,8 +142,7 @@ const app = new Vue({
             this.base_url = localStorage.getItem('base_url')
             this.mostrarFormularioLogin = true
             this.mostrarUltimoLogin = false
-        }
-        
+        },
 
         // fetchDadosAutenticados(){
         //     // Requisiçao ------------ //

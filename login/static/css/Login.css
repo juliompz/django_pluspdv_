@@ -22,6 +22,11 @@ footer{
     left:142px;
 }
 
+input:focus{
+    outline: 0;
+    background-image: none;
+}
+
 
 .container-login{
     width: 100%;
@@ -41,7 +46,7 @@ footer{
 
 }
 
-.entrada-cnpj input{
+.cnpj-input{
     width: 353px;
     height: 46px;
     border-radius: 10px;
@@ -80,6 +85,10 @@ footer{
     text-align: center;
     align-items: center;
 
+}
+
+.area-form{
+    position: static;
 }
 
 .entrada-login-usuario input{
@@ -123,7 +132,7 @@ footer{
     margin-left: 28px;
 }
 
-/* IMAGEM AO LADO DO NOME E CNPJ*/
+/* IMAGEM AO LADO DO NOME E CPF*/
 .empresa-info-img{
     margin-top: 17px;
     margin-left: 13px;
@@ -146,7 +155,7 @@ footer{
 
 }
 
-/* TEXTO NOME E CNPJ*/
+/* TEXTO NOME E CPF*/
 .empresa-info-text{
     width: 198px;
     height: 48px;
@@ -176,4 +185,62 @@ p.empresa-text-cnpj{
 
 .trocar-empresa p {
     margin-left: 5px
+}
+
+/* REMOVENDO FLECHA DO INPUT TYPE NUMBER */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* TRATAMENTO DE ERROS NO INPUT CNPJ */
+
+.cnpj-error {
+    width: 353px;
+    height: 46px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    padding: 0 16px;
+    box-sizing: border-box;
+    border: 1px solid #DA3333;
+    background-image: url('../assets/icon_error.svg');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 13px) center;
+}
+
+.cnpj-error::selection{
+    background-image: none;
+}
+
+.cnpj-error::placeholder{
+    color: #DA3333;
+}
+
+/* TRATAMENTO DE ERROS NO LOGIN USUARIO */
+
+.login-invalido{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    margin-left: 24px;
+    color: #FFFFFF;
+    size: 12px;
+    font-weight: 700;
+    position: absolute;
+}
+
+.entrar-em-contato{
+    color: #FFFFFF;
+    margin-top: 40px;
+    width: 332px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.entrar-em-contato strong{
+    font-weight: 600;
+    text-decoration: underline;
 }

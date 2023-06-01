@@ -13,21 +13,36 @@
         <img src="{% static 'assets/logo_pluspdv.svg' %}" alt="">
     </header>
 
+
+    <!--ENTRADA ONDE PEDE O O CNPJ DA EMPRESA-->
     <div v-if="mostrarFormularioCnpj" class="entrada-cnpj">
         <form @submit.prevent="fetchEmpresa">
-          <input v-model="cnpj" type="text" placeholder="Digite o CNPJ" required>
+          <input v-if="!cnpj_error" v-model="cnpj" class="cnpj-input" type="number" placeholder="Digite o CNPJ" required>
+          <input v-if="cnpj_error" class="cnpj-error" v-model="cnpj"  type="number" placeholder="Digite um CNPJ válido" required>
           <button type="submit">Avançar</button>
         </form>
     </div>
 
-
-    <div v-if="mostrarFormularioLogin" class="entrada-login-usuario">
+    <!--ENTRADA ONDE PEDE O CPF E SENHA DO USUARIO-->
+    <div v-if="mostrarFormularioLogin && !login_error" class="entrada-login-usuario">
         <form @submit.prevent="fetchLoginUser">
-          <input type="text" placeholder="Digite o CPF" v-model="cpf" required>
+          <input type="number" v-model="cpf" placeholder="Digite o CPF"  required>
           <input type="password" placeholder="Senha" v-model="password" required>
-          <button type="submit">Entrar</button>
+          <button id="botao" type="submit">Entrar</button>
         </form>
     </div>
+
+    <!--QUANDO O LOGIN FOR INVALIDO-->
+    <div v-if="mostrarFormularioLogin && login_error" class="entrada-login-usuario">
+        <form @submit.prevent="fetchLoginUser">
+            <input type="number" class="cnpj-error"  placeholder="Digite um CPF válido" v-model="cpf" required>
+            <input type="password" class="cnpj-error" placeholder="Senha incorreta" v-model="password" required>
+            <p class="login-invalido">Dados de login invalidos</p>
+          <button id="botao" type="submit" @click="BotaoLogin">Entrar</button>
+        </form>
+        <p v-if="entrar_em_contato" class="entrar-em-contato">Não consegue acessar a sua conta? <strong>Entre em contato</strong></p>
+    </div>
+
 
     <div v-if="mostrarUltimoLogin">
         <div class="empresa-info" @click="FazerLoginNovamente">
