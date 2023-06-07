@@ -5,3 +5,6 @@ def TelaHome(request):
 
 def TelaDetalhamento(request):
     return render(request, 'TelaDetalhamento.html')
+
+def TelaAcesso(request):
+    return render(request, 'acesso/TelaAcesso.html')

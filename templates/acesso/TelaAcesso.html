@@ -1,0 +1,635 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/acesso/TelaAcesso.css' %}">
+{% endblock %}
+
+{% block title%}Acesso{% endblock %}
+
+{% block content %}
+
+    <div id="acesso">
+    
+        <div class="parte-inicial-azul">
+            <div class="saudacao">
+                <p class="title">Olá, João</p>
+                <p>COMERCIAL J.BRITO - SÃO JOSÉ DO VALE DO RIO PRETO</p>
+                <p class="cnpj">CNPJ:04.238.711/0001-50</p>
+
+                <div class="trocar-empresa" id="trocar_empresa">
+                    <img src="{% static 'assets/img/acesso/icon_seta_trocar.svg' %}" alt="p">
+                    <p>Trocar Empresa</p>
+                </div>
+
+                <!--AREA TROCAR EMPRESAS OPCOES DE EMPRESAS -->
+                <div id="sobreposicao" style="display: none;"></div>
+                <div class="opcao-empresas" id="opcao_empresa">
+                    <div class="container-opcao" >
+                        <div class="op-title" >
+                            <p>Trocar empresa</p>
+                        </div>
+
+                        <div class="input-pesquisar">
+                            <input type="text" placeholder="Buscar por nome fantasia, cidade ou CNPJ">
+                        </div>
+
+                        <div class="area-empresas-box">
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="box-empresa">
+                                <div class="box-empresa-text">
+                                    <p class="nome-empresa">
+                                        COMERCIAL J.BRITO 
+                                    </p>
+    
+                                    <p class="cnpf-e-localizacao">
+                                        CNPJ: 12.222.243/0001-53- SÃO JOSÉ DO VALE DO RIO PRETO-RJ 
+                                    </p>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- END AREA TROCAR EMPRESAS OPCOES DE EMPRESAS -->
+
+
+            </div>
+            <div class="data" >
+                <img src="{% static 'assets/img/acesso/calendar.svg' %}" alt="calendario">
+                <p id="icon_data">Data</p>
+            </div>
+
+            <!--CALENDARIO-->
+
+            <div class="wrapper" id="calendario">
+                <header>
+            
+                  <div class="icons">
+                    <div class="seta-esq">
+                      <span id="prev" class="material-symbols-rounded"> <img src="{% static 'assets/img/acesso/seta-esquerda.svg' %}" alt=""> </span>
+                    </div>
+                    <div class="mes-definido">
+                      <p class="current-date"></p>
+                      <p class="current-year"></p>
+                    </div>
+            
+                    <div class="seta-dir">
+                      <span id="next" class="material-symbols-rounded"> <img src="{% static 'assets/img/acesso/seta-direita.svg' %}" alt=""></span>
+                    </div>
+                  </div>
+                </header>
+                <div class="calendar">
+                  <ul class="weeks">
+                    <li>Dom</li>
+                    <li>Seg</li>
+                    <li>Ter</li>
+                    <li>Qua</li>
+                    <li>Qui</li>
+                    <li>Sex</li>
+                    <li>Sab</li>
+                  </ul>
+                  <ul class="days"></ul>
+                </div>
+              </div>
+
+            <!--FIM DO CALENDARIO-->
+
+            <div class="parte-semanal">
+                <div class="seta-esq">
+                    <img src="{% static 'assets/img/acesso/seta-esquerda.svg' %}" alt="seta-esq">
+                </div>
+                <div class="dia-dia">
+                    <p>14/08 a 18/08</p>
+                </div>
+                <div class="seta-dir">
+                    <img src="{% static 'assets/img/acesso/seta-direita.svg' %}" alt="seta-dir">
+                </div>
+            </div>
+        </div>
+       
+        <div class="dashboard">
+
+            <div class="container">
+                <div class="graphic" style="display: flex; width: 100%; height: 200px; border-radius: 16px 16px 0 0; align-items: center;">
+                    <h3>Grafico em desenvolvimento...</h3>
+                </div>
+    
+                <div class="area-card-vendas-totais">
+                    <div class="card">
+                        <p class="card-titulo">
+                            Vendas totais
+                        </p>
+    
+                        <p class="card-valor">
+                            R$ 130.000
+                        </p>
+    
+                        <p class="quantidades-vendidas">
+                            999.999 quantidades vendidas
+                        </p>
+    
+                    </div>
+    
+                    <div class="card">
+                        <p class="card-titulo">
+                            Total de desconto
+                        </p>
+    
+                        <p class="card-valor">
+                            R$ 70.000
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="area-vendas-totais">
+                    <p class="vendas-totais-titulo">Vendas totais</p>
+
+                    <div class="conteudo">
+                        <div class="nome-coluna">
+                            <div class="descricao">
+                                <p>Descrição</p>
+                            </div>
+
+                            <div class="total-de-vendas">
+                                <p>Total de vendas</p>
+                            </div>
+
+                            <div class="qtd-vendas">
+                                <p>Quantidade de vendas</p>
+                            </div>
+                        </div>
+
+                        <div class="valores">
+                            <div class="total-geral">
+                                <p>Total geral</p>
+                            </div>
+
+                            <div class="total-de-vendas-valor">
+                                <p>R$999.999,99</p>
+                            </div>
+    
+                            <div class="qtd-vendas-valor">
+                                <p>999.999.999</p>
+                            </div>
+
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+                <div class="ticket-medio-area">
+                    <p class="title">Ticket médio</p>
+
+                    <div class="ticket-medio">
+                        <div class="nome-coluna">
+                            <div class="coluna-dia">
+                                <p>Dia</p>
+                            </div>
+
+                            <div class="coluna-qtd">
+                                <p>Quantidade</p>
+                            </div>
+
+                            <div class="coluna-total-vendas">
+                                <p>Total de vendas</p>
+                            </div>
+
+                            <div class="coluna-media">
+                                <p>Média</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>14/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>22/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>22/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>22/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+
+                        <div class="valores-ticket-medio">
+                            <div class="valor-dia">
+                                <p>22/08/22</p>
+                            </div>
+
+                            <div class="valor-qtd">
+                                <p>999.999</p>
+                            </div>
+
+                            <div class="valor-total-vendas">
+                                <p>R$999.999,99</p>
+                            </div>
+
+                            <div class="valor-media">
+                                <p>999</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+                <footer id="footer">
+                    <div class="footer-item">
+                        <img src="{% static 'assets/img/vendas.svg' %}" alt="Vendas_icon">
+                        <p>Vendas</p>
+                    </div>
+                
+                    <div class="footer-item">
+                        <img src="{% static 'assets/img/financeiro.svg' %}" alt="Financeiro_icon">
+                        <p>Financeiro</p>
+                    </div>
+                
+                    <div class="footer-item">
+                        <img src="{% static 'assets/img/estoque.svg' %}" alt="Estoque_icon">
+                        <p>Estoque</p>
+                    </div>
+                
+                    <div class="footer-item">
+                        <img src="{% static 'assets/img/relatorios.svg' %}" alt="Relatórios_icon">
+                        <p>Relatórios</p>
+                    </div>
+                </footer>
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/TelaAcesso.js' %}"></script>
+
+{% endblock %}

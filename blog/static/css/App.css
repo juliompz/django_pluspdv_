@@ -7,11 +7,10 @@
 }
 
 body {
-  margin: 0px;
+  width: 100%;
+  margin: 0;
 }
 
 #app{
   background-color: #F7FBFF;
-
 }
-

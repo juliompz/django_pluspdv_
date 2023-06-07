@@ -1,0 +1,616 @@
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    background-color: #2B4B88;
+}
+
+/* PARTE INICIAL AZUL */
+
+.parte-inicial-azul{
+    top: 0;
+    background-color: #2B4B88;
+    color: #FFFF;
+    margin-top: 0;
+    width: 100%;
+    height: 210px;
+}
+
+/* SAUDACAO */
+.saudacao{
+    margin-left: 20px;
+    margin-top: 24px;
+}
+.saudacao .title{
+    line-height: 48px;
+    font-weight: 600;
+    font-size: 32px;
+}
+
+.saudacao p{
+    font-size: 12px;
+    margin-bottom: 1px;
+    font-weight: 400;
+}
+
+.saudacao .cnpj{
+    margin-bottom: 4px;
+}
+
+
+/* TROCAR EMPRESA*/
+
+.trocar-empresa{
+    top: 110px;
+    left: 13px;
+    display: flex;
+    background-color: #FFFF;
+    color: #000000;
+    width: 130px;
+    height: 24px;
+    border-radius: 8px;
+    align-items: center;
+    text-align: center;
+}
+
+.trocar-empresa img{
+    padding: 2px;
+}
+
+.trocar-empresa p {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* TROCAR EMPRESA OPÇÕES */
+
+.opcao-empresas{
+    display: none;
+    color: #000000;
+    position: absolute;
+    width: 360px;
+    height: 750px;
+    left: 5px;
+    top: 0px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    margin-left: 12px;
+    margin-top: 90px;
+    z-index: 2
+}
+.container-opcao{
+    margin-left: 10px;
+}
+
+.op-title{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.op-title p {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.input-pesquisar {
+    position: relative;
+  }
+
+.input-pesquisar input{
+    width: 337px;
+    height: 46px;
+    margin-top: 6px;
+    margin-bottom: 5px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    padding: 0 40px;
+    border-radius: 10px;
+}
+
+.input-pesquisar input::placeholder{
+    font-size: 12px;
+}
+
+.input-pesquisar::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Posição horizontal do ícone */
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url('../acesso/icon_pesquisar.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+.area-empresas-box{
+    overflow-y: scroll;
+    max-height: 650px;
+}
+
+.box-empresa{
+    width: 337px;
+    height: 51px;
+    display: flex;
+    margin-top: 9px;
+    flex-direction: column;
+    background-color: #95CCF4;
+    border-radius: 7px;
+
+}
+
+.box-empresa-text{
+    margin-left: 6px;
+    margin-top: 8px;
+}
+
+.box-empresa .nome-empresa{
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.box-empresa .cnpf-e-localizacao{
+    margin-top: 0;
+    font-weight: 500;
+    font-size: 10px;
+}
+
+
+#sobreposicao {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    pointer-events: none;
+    z-index: 1;
+    
+  }
+
+/* END TROCAR EMPRESA OPÇÕES */
+
+
+.data{
+    display: flex;
+    color: #000000;
+    background-color: #FFFF;
+    width: 68px;
+    height: 24px;
+    margin-left: 305px;
+    border-radius: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.data img{
+    width: 12px;
+    height: 14px;
+    margin-left: 11px;
+}
+
+.data p {
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 3px;
+}
+
+.parte-semanal{
+    display: flex;
+    justify-content: space-around;
+    color: #000000;
+    background-color: #FFFF;
+    border-radius: 8px;
+    width: 352px;
+    height: 44px;
+    margin-bottom: 25px;
+    margin-top: 8px;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.seta-esq{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    align-items: center;
+}
+
+.dia-dia p{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+.seta-dir{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    align-items: center;
+}
+
+.seta-esq img, .seta-dir img {
+    padding: 10px 8px;
+}
+
+/* CALENDARIO */
+
+.wrapper{
+    position: absolute;
+    top: 110px;
+    left: 13px;
+    width: 367px;
+    height: auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    display: none;
+    color: #000000;
+  }
+  .wrapper header{
+    display: flex;
+    align-items: center;
+    padding: 10px 30px 0px;
+    justify-content: space-between;
+  }
+  
+  /* PARTE ADICIONADA POR MIM */
+  
+  header .icons {
+      display: flex;
+  }
+  
+  .seta-esq{
+      display: flex;
+      width: 30px;
+      height: 30px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      align-items: center;
+      margin-left: 25px;
+  }
+  
+  .dia-dia p{
+      font-weight: 600;
+      font-size: 20px;
+  }
+  
+  
+  .seta-dir{
+      display: flex;
+      width: 30px;
+      height: 30px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      align-items: center;
+  }
+  
+  .seta-esq img, .seta-dir img {
+      padding: 10px 8px;
+  }
+  
+  
+  .mes-definido{
+      width: 200px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+  }
+  
+  /* FIM PARTE ADICIONADA POR MIM */
+  
+  header .current-date{
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  header .current-year{
+      margin-top: -8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(30, 30, 30, 0.5);
+    }
+  
+  .calendar{
+    padding: 20px;
+  }
+  .calendar ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+  }
+  .calendar .days{
+    margin-bottom: 20px;
+  }
+  .calendar li{
+    color: #0D0521;
+    width: calc(100% / 7);
+    
+  }
+  .calendar .weeks li{
+    font-weight: 500;
+    cursor: default;
+    color: rgba(30, 30, 30, 0.5);
+    font-size: 13px;
+  }
+  .calendar .days li{
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+    font-size: 15px;
+    margin-top: 30px;
+  }
+  .days li.inactive{
+    color: rgba(30, 30, 30, 0.5);
+  }
+  .days li.active{
+    color: #FFFFFF;
+  }
+  .days li::before{
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    height: 40px;
+    width: 40px;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .days li.active::before{
+    background: #0094FF;
+    color: #FFFFFF;
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+  }
+  .days li:not(.active):hover::before{
+    background: #f2f2f2;
+  }
+
+
+/* END CALENDARIO */
+
+
+
+/* DASHBOARD */
+
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    background-color: #F7FBFF;
+    border-radius: 16px 16px 0px 0px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+/* AREA DOS CARDS */
+
+.area-card-vendas-totais{
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #0670BC;
+    width: 163px;
+    height: 100px;
+    color: #FFFFFF;
+    border-radius: 9px;
+    margin-right: 24px;
+}
+
+.card .card-titulo {
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.card .card-valor{
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.quantidades-vendidas{
+    font-size: 10px; 
+    margin-top: -5px;
+    opacity: 70%;
+}
+
+/* AREA VENDAS TOTAIS */
+
+/*.area-vendas-totais{
+    
+}
+*/
+
+/* TITULO "VENDAS TOTAIS" */
+
+.vendas-totais-titulo{
+    font-weight: 600;
+    font-size: 20px;
+    color: #2B4B88;
+}
+
+.conteudo {
+    display: flex;
+    flex-direction: column;
+}
+
+/* COLUNAS*/
+.nome-coluna{
+    display: flex;
+    align-items: center;
+}
+
+.nome-coluna p{
+    font-weight: 300;
+    font-size: 12px;
+    text-align: center;
+}
+
+.nome-coluna .descricao{
+    margin-right: 60px;
+}
+
+.nome-coluna .total-de-vendas{
+    margin-right: 30px;
+}
+
+.qtd-vendas{
+    width: 100px;
+}
+
+/* VALORES */
+
+.valores{
+    display: flex;
+}
+
+.valores p {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.valores .total-geral{
+    margin-right: 60px;
+}
+
+.total-de-vendas-valor{
+    margin-right: 50px;
+}
+
+/* AREA TICKET MÉDIO */
+
+.ticket-medio-area{
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-medio-area{
+    margin-top: 70px;
+}
+
+.ticket-medio-area .title {
+    font-weight: 600;
+    font-size: 20px;
+    color: #2B4B88;
+    margin-bottom: 15px;
+}
+
+/* AREA DAS COLUNAS */
+
+.coluna-dia{
+    margin-right: 50px;
+}
+
+.coluna-qtd {
+    margin-right: 30px;
+}
+
+.coluna-total-vendas{
+    margin-right: 50px;
+}
+
+.coluna-media{
+    margin-right: 0px;
+}
+
+/* VALORES DAS COLUNAS */
+
+.valores-ticket-medio{
+    display: flex;
+    font-size: 12px;
+    margin-top: 5px;
+    border-bottom: 2px solid #D8D0D0;
+}
+
+.valor-dia{
+    width: 70px;
+}
+
+.valor-qtd{
+    width: 100px;
+}
+
+.valor-qtd p{
+    margin-left: 10px;
+}
+
+.valor-total-vendas{
+    width: 140px;
+}
+
+.valor-total-vendas p {
+    margin-left: 10px;
+}
+
+.valor-media{
+    width: 60px
+}
+
+.valor-media p{
+    margin-left: 18px;
+}
+
+/* FOOTER */
+
+footer {
+    width: 100%;
+    display: flex;
+    position: fixed;
+    bottom:0;
+    left:0;
+    background: #F7FBFF;
+}
+  
+  
+  footer img {
+    padding: 0;
+    width: 24px;
+  }
+  
+  footer img:nth-of-type(4){
+    width: 28px;
+  }
+  
+  
+  .footer-item{
+    display: flex;
+    margin-left: 22px;
+    flex-direction: column;
+    margin-top: 15px;
+    text-align: center;
+    align-items: center;
+  
+  }
+  
+  .footer-item p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-top: 0;
+    opacity: 70%;
+  }
+
+
+
