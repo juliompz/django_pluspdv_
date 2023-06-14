@@ -37,7 +37,7 @@ const app = new Vue({
                   /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
                   '$1.$2.$3/$4-$5'
                 );
-        
+                
                 return cnpjFormatado;
               }
               return '';
@@ -73,6 +73,7 @@ const app = new Vue({
           },
           
         fetchEmpresa(){
+
             axios.get(`http://concentrador.pluspdv.com.br:51000/${this.cnpjNaoFormatado}`)
             .then(response => {
                 console.log(response.data)
@@ -106,13 +107,19 @@ const app = new Vue({
                 login: this.cpfNaoFormatado,
                 password: this.password
             };
+            
+            const cpfUser = params.login
+            localStorage.setItem('cpfUser', cpfUser);
             axios.post(`${this.base_url}/api/Login`, params)
             .then(response => {
                 console.log(response.data)
                 console.log('ENTROU NA API')
-                this.token = response.data.token
 
-                //this.fetchDadosAutenticados()
+                const token = response.data.token
+
+                localStorage.setItem('token', token);
+
+                window.location.href = '/acesso';
             })
             .catch(error => {
                 console.log(error)
@@ -136,31 +143,37 @@ const app = new Vue({
         TrocarEmpresa(){
             localStorage.removeItem('empresa_nome');
             localStorage.removeItem('empresa_cnpj');
+            localStorage.removeItem('cpfUser')
             this.cnpj = '';
             this.mostrarFormularioCnpj = true;
             location.reload();
         },
         FazerLoginNovamente(){
-            this.base_url = localStorage.getItem('base_url')
-            this.mostrarFormularioLogin = true
-            this.mostrarUltimoLogin = false
-        },
+            if(localStorage.getItem('base_url')){
+                this.base_url = localStorage.getItem('base_url')
+                this.mostrarFormularioLogin = true
+                this.mostrarUltimoLogin = false
+            }
 
-        // fetchDadosAutenticados(){
-        //     // Requisiçao ------------ //
-        //     axios.get(`${this.base_url}/Algum/Caminho`, {
-        //         headers: {
-        //             Authorization: `Bearer ${this.token}`
-        //         }
-        //     })
-        //     .then(reponse => {
-        //         // Tratamento dos dados
-        //     })
-        // }
+        },
+        // TROCAR EMPRESA QUANDO O USUARIO TAVA LOGADO EM OUTRA
+        TrocarEmpresaJaLogado(){
+            var base_urlEscolhida = localStorage.getItem('base_urlEscolhida')
+
+            if(base_urlEscolhida){
+                this.base_url = base_urlEscolhida
+                this.mostrarUltimoLogin = false
+                this.mostrarFormularioCnpj = false
+                this.mostrarFormularioLogin = true
+            }
+            
+        }
+
     },
     created(){
         const storedEmpresaNome = localStorage.getItem('empresa_nome');
         const storedEmpresaCnpj = localStorage.getItem('empresa_cnpj');
+
         if (storedEmpresaNome && storedEmpresaCnpj) {
             this.empresa_nome = storedEmpresaNome;
             this.storeId = storedEmpresaCnpj

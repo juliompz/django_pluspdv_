@@ -24,7 +24,14 @@ html{
     margin-left: 20px;
     margin-top: 24px;
 }
-.saudacao .title{
+.saudacao .title {
+    width: 360px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.saudacao .title p{
     line-height: 48px;
     font-weight: 600;
     font-size: 32px;
@@ -34,6 +41,12 @@ html{
     font-size: 12px;
     margin-bottom: 1px;
     font-weight: 400;
+}
+
+.saudacao .cnpj, .saudacao .empresa_dados{
+    font-size: 10px;
+    font-weight: 400;
+    opacity: 80%;
 }
 
 .saudacao .cnpj{
@@ -267,13 +280,17 @@ html{
       display: flex;
   }
   
-  .seta-esq{
+  .seta-esq-calendar{
       display: flex;
       width: 30px;
       height: 30px;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       align-items: center;
       margin-left: 25px;
+  }
+
+  .seta-esq-calendar img, .seta-dir-calendar img{
+    margin-left: 10px;
   }
   
   .dia-dia p{
@@ -282,7 +299,7 @@ html{
   }
   
   
-  .seta-dir{
+  .seta-dir-calendar{
       display: flex;
       width: 30px;
       height: 30px;
@@ -439,10 +456,20 @@ html{
 
 /* AREA VENDAS TOTAIS */
 
-/*.area-vendas-totais{
-    
+/* GRAFICO */
+
+.graphic{
+    display: flex; 
+    width: 90%; 
+    height: 300px;
+    border-radius: 16px 16px 0 0; 
+    align-items: center;
+    margin-left: 10px;
 }
-*/
+
+#myChart{
+    margin-bottom: 30px;
+}
 
 /* TITULO "VENDAS TOTAIS" */
 
@@ -496,8 +523,18 @@ html{
     margin-right: 60px;
 }
 
+.qtd-vendas-valor{
+    width: 100px;
+    text-align: center;
+}
+
 .total-de-vendas-valor{
-    margin-right: 50px;
+    width: 120px;
+    text-align: center;
+}
+
+.total-de-vendas-valor p {
+    margin-left: -30px;
 }
 
 /* AREA TICKET MÉDIO */
@@ -551,10 +588,12 @@ html{
 
 .valor-qtd{
     width: 100px;
+    display: flex;
+    justify-content: center;
 }
 
 .valor-qtd p{
-    margin-left: 10px;
+    margin-left: -30px;
 }
 
 .valor-total-vendas{
@@ -570,7 +609,7 @@ html{
 }
 
 .valor-media p{
-    margin-left: 18px;
+    margin-left: 12px;
 }
 
 /* FOOTER */
