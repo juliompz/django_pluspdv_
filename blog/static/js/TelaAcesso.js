@@ -263,6 +263,8 @@ var app = new Vue({
                         [this.dia7.sales_value, this.dia7.sales_count],
                     ]
 
+                    const maiorValorData = Math.max(...dados.map(item => item[0]));
+
                     if (this.myChart) {
                         this.myChart.destroy();
                     }
@@ -300,7 +302,7 @@ var app = new Vue({
                                     }
                                   },
                                 y: {
-                                    max: 5000,
+                                    max: maiorValorData + 500,
                                     display: false,
                                 },
         
@@ -433,6 +435,8 @@ var app = new Vue({
             this.fetchTicketMedio()
 
             console.log(this.formatDataUrl(this.data_unica))
+
+            
         },
         alterarMes(flag) {
             if (flag === 'prev') {
