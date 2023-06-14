@@ -23,8 +23,29 @@ var app = new Vue({
         // CALENDARIO
 
         currentDate: new Date(),
-        currentMonth: '',
+        currMonth: '',
+        currYear: '',
+        next: false,
+        prev: false,
+        firstDayofMonth: '',
+        lastDateofMonth: '',
+        lastDayofMonth: '',
+        lastDateofLastMonth: '',
+        date: '',
+        currentDate: '',
         currentYear: '',
+        months: [],
+        daystag: '',
+        mesExibir: '',
+        anoExibir: '',
+        liTag: '',
+        displayedDays: [],
+        selectedDate: null,
+        isSelected: false,
+
+
+
+
 
         // AREA TROCAR EMPRESA
         trocar_empresa: [],
@@ -37,8 +58,7 @@ var app = new Vue({
         quantidades_vendidas: '',
         vendas: [],
         data: '',
-        //data_min:'2023%2F05%2F08',
-        data_min:'2023%2F05%2F14',
+        data_min:'2023%2F05%2F08',
         data_max:'2023%2F05%2F14',
         data_unica:'',
         bool_dataUn: false,
@@ -132,7 +152,7 @@ var app = new Vue({
                     this.bool_dataUn = true
 
                     const labels = [
-                        [this.formatarData(this.dia1.date)],
+                        [this.formatDate(this.dia1.date)],
                     ];
 
                     const dados = [
@@ -176,7 +196,7 @@ var app = new Vue({
                                     }
                                   },
                                 y: {
-                                    max: 2000,
+                                    max: 5000,
                                     display: false,
                                 },
         
@@ -323,12 +343,6 @@ var app = new Vue({
                     this.myChart = new Chart(ctx, config);
         
                 }
-
-                
-
-            
-
-
             // END GRAFICO BARRA //
 
                 console.log(this.dia1)
@@ -338,9 +352,97 @@ var app = new Vue({
                 console.log(error)
             })
         },
-        calendario(){
-            
+        
+        calendario() {
+            this.currentDate = new Date();
+            this.renderCalendar();
+        },
+        renderCalendar() {
 
+            this.months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+              "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+            this.currYear = this.currentDate.getFullYear();
+            this.currMonth = this.currentDate.getMonth();
+            var firstDay = new Date(this.currYear, this.currMonth, 1);
+            var lastDay = new Date(this.currYear, this.currMonth + 1, 0);
+            var lastDayofLastMonth = new Date(this.currYear, this.currMonth, 0);
+            var daystag = lastDayofLastMonth.getDate() - firstDay.getDay() + 1;
+            this.daystag = daystag
+            var days = lastDay.getDate();
+
+
+            this.mesExibir = this.months[this.currMonth]
+            this.anoExibir = this.currYear
+            this.firstDayofMonth = firstDay.getDay();
+            this.lastDateofMonth = lastDay.getDate();
+            this.lastDayofMonth = lastDay.getDay();
+            this.lastDateofLastMonth = lastDayofLastMonth.getDate();
+
+            this.displayedDays = [];
+
+            for (let i = this.firstDayofMonth; i > 0; i--) { // creating li of previous month last days
+            this.displayedDays.push({
+                date: lastDayofLastMonth.getDate() - i + 1,
+                inactive: true,
+                active: false,
+                selected: false
+            });
+            }
+
+            for (let i = 1; i <= this.lastDateofMonth; i++) { // creating li of all days of current month
+            let isToday = i === this.currentDate.getDate() && this.currMonth === new Date().getMonth() && this.currYear === new Date().getFullYear();
+            let isSelected = i === this.selectedDate && this.currMonth === this.currentDate.getMonth() && this.currYear === this.currentDate.getFullYear();
+            this.displayedDays.push({
+                date: i,
+                inactive: false,
+                active: isToday,
+                isSelected: false
+            });
+            }
+
+            for (let i = this.lastDayofMonth; i < 6; i++) { // creating li of next month first days
+            this.displayedDays.push({
+                date: i - this.lastDayofMonth + 1,
+                inactive: true,
+                active: false
+            });
+            }
+
+        },
+
+        // SELECIONAR DIA PARA RECUPERAR DADOS
+        selectDate(day) {
+            this.displayedDays.forEach(d => {
+                d.isSelected = false;
+                d.active = false;
+            });
+        
+            // Marcar o dia selecionado
+            day.isSelected = true;
+            day.active = true;
+        
+            // Atualizar a variável selectedDate
+            this.selectedDate = day.date;
+
+            this.data_unica = `${this.currYear}/${this.currMonth}/${this.selectedDate}`
+
+            this.data_min = this.formatDataUrl(this.data_unica)
+            this.data_max = this.formatDataUrl(this.data_unica)
+
+            this.fetchTicketMedio()
+
+            console.log(this.formatDataUrl(this.data_unica))
+        },
+        alterarMes(flag) {
+            if (flag === 'prev') {
+                this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+                this.mesExibir = this.months[this.currMonth]
+            } else if(flag === 'next') {
+                this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+                this.mesExibir = this.months[this.currMonth]
+            }
+            this.renderCalendar();
         },
 
         diminuirData() {
@@ -348,13 +450,22 @@ var app = new Vue({
             const dataMin = moment(this.data_min, 'YYYY%2FMM%2FDD');
             const dataMax = moment(this.data_max, 'YYYY%2FMM%2FDD');
 
-            // Retroceder 7 dias nas datas mínima e máxima
-            const novaDataMin = dataMin.subtract(7, 'days').format('YYYY%2FMM%2FDD');
-            const novaDataMax = dataMax.subtract(7, 'days').format('YYYY%2FMM%2FDD');
-            this.data_min = novaDataMin
-            this.data_max = novaDataMax
-            this.fetchTicketMedio()
+            if(dataMin.isSame(dataMax)) {
 
+                const novaDataMin = dataMin.subtract(1, 'days').format('YYYY%2FMM%2FDD');
+                this.data_min = novaDataMin
+                this.data_max = novaDataMin
+                this.fetchTicketMedio()
+                // Retroceder 7 dias nas datas mínima e máxima
+
+            }else{
+                const novaDataMin = dataMin.subtract(7, 'days').format('YYYY%2FMM%2FDD');
+                const novaDataMax = dataMax.subtract(7, 'days').format('YYYY%2FMM%2FDD');
+                this.data_min = novaDataMin
+                this.data_max = novaDataMax
+                this.fetchTicketMedio()
+            }
+            
           },
           aumentarData(){
 
@@ -466,55 +577,7 @@ document.addEventListener('click', (event) => {
 })
 // END APARECER E DESAPARECER CALENDARIO //
 
-const daysTag = document.querySelector(".days"),
-currentDate = document.querySelector(".current-date"),
-currentYear = document.querySelector(".current-year"),
-prevNextIcon = document.querySelectorAll(".icons span");
-// getting new date, current year and month
-let date = new Date(),
-currYear = date.getFullYear(),
-currMonth = date.getMonth();
-// storing full name of all months in array
-const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
-              "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-const renderCalendar = () => {
-    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
-    lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
-    lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
-    lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
-    let liTag = "";
-    for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
-        liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
-    }
-    for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
-        // adding active class to li if the current day, month, and year matched
-        let isToday = i === date.getDate() && currMonth === new Date().getMonth() 
-                     && currYear === new Date().getFullYear() ? "active" : "";
-        liTag += `<li class="${isToday}">${i}</li>`;
-    }
-    for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
-        liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
-    }
-    currentDate.innerText = `${months[currMonth]}`; // passing current mon and yr as currentDate text ${currYear}
-    currentYear.innerText = `${currYear}`; // passing current mon and yr as currentDate text ${currYear}
-    daysTag.innerHTML = liTag;
-}
-renderCalendar();
-prevNextIcon.forEach(icon => { // getting prev and next icons
-    icon.addEventListener("click", () => { // adding click event on both icons
-        // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
-        currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
-        if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
-            // creating a new date of current year & month and pass it as date value
-            date = new Date(currYear, currMonth, new Date().getDate());
-            currYear = date.getFullYear(); // updating current year with new date year
-            currMonth = date.getMonth(); // updating current month with new date month
-        } else {
-            date = new Date(); // pass the current date as date value
-        }
-        renderCalendar(); // calling renderCalendar function
-    });
-});
+
 
 
  

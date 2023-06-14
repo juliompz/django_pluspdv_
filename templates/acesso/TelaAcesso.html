@@ -70,16 +70,16 @@
                 <header>
             
                   <div class="icons">
-                    <div class="seta-esq-calendar" @click="changeMonth('prev')">
-                      <span id="prev" class="material-symbols-rounded"> <img src="{% static 'assets/img/acesso/seta-esquerda.svg' %}" alt=""> </span>
+                    <div class="seta-esq-calendar" @click="alterarMes('prev')">
+                      <span v-model="prev" id="prev" class="material-symbols-rounded"> <img src="{% static 'assets/img/acesso/seta-esquerda.svg' %}" alt=""> </span>
                     </div>
                     <div class="mes-definido">
-                      <p class="current-date"></p>
-                      <p class="current-year"></p>
+                      <p class="current-date">${mesExibir}</p>
+                      <p class="current-year">${anoExibir}</p>
                     </div>
             
-                    <div class="seta-dir-calendar" @click="changeMonth('next')">
-                      <span id="next" class="material-symbols-rounded"> <img src="{% static 'assets/img/acesso/seta-direita.svg' %}" alt=""></span>
+                    <div class="seta-dir-calendar" @click="alterarMes('next')">
+                      <span v-model="next" id="next" class="material-symbols-rounded"> <img src="{% static 'assets/img/acesso/seta-direita.svg' %}" alt=""></span>
                     </div>
                   </div>
                 </header>
@@ -94,7 +94,9 @@
                     <li>Sab</li>
                   </ul>
                   <ul class="days">
-                    
+                    <li v-for="day in displayedDays" :class="{'inactive': day.inactive, 'active': day.active, 'selected': day.selected}" @click="selectDate(day)">
+                        <span>${ day.date }</span>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -107,7 +109,7 @@
                 </div>
                 <div class="dia-dia">
                     <p v-if="!bool_dataUn">${formatarData(dia1.date)} a ${formatarData(dia7.date)}</p>
-                    <p v-if="bool_dataUn">${formatarData(data_unica)}</p>
+                    <p v-if="bool_dataUn">${formatDate(data_unica)}</p>
                 </div>
                 <div class="seta-dir" id="seta-dir" @click="aumentarData">
                     <img src="{% static 'assets/img/acesso/seta-direita.svg' %}" alt="seta-dir">
