@@ -106,7 +106,8 @@
                     <img src="{% static 'assets/img/acesso/seta-esquerda.svg' %}" alt="seta-esq">
                 </div>
                 <div class="dia-dia">
-                    <p>${formatarData(dia1.date)} a ${formatarData(dia7.date)}</p>
+                    <p v-if="!bool_dataUn">${formatarData(dia1.date)} a ${formatarData(dia7.date)}</p>
+                    <p v-if="bool_dataUn">${formatarData(data_unica)}</p>
                 </div>
                 <div class="seta-dir" id="seta-dir" @click="aumentarData">
                     <img src="{% static 'assets/img/acesso/seta-direita.svg' %}" alt="seta-dir">

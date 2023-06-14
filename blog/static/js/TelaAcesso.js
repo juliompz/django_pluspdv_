@@ -37,8 +37,11 @@ var app = new Vue({
         quantidades_vendidas: '',
         vendas: [],
         data: '',
-        data_min:'2023%2F05%2F08',
+        //data_min:'2023%2F05%2F08',
+        data_min:'2023%2F05%2F14',
         data_max:'2023%2F05%2F14',
+        data_unica:'',
+        bool_dataUn: false,
 
         // DIAS SEPARADOS
         dia1: '',
@@ -122,105 +125,208 @@ var app = new Vue({
                 this.dia6 = response.data.dates[5]
                 this.dia7 = response.data.dates[6]
 
-                const labels = [
-                    ['Seg', this.formatarData(this.dia1.date)],
-                    ['Ter', this.formatarData(this.dia2.date)],
-                    ['Qua', this.formatarData(this.dia3.date)],
-                    ['Qui', this.formatarData(this.dia4.date)],
-                    ['Sex', this.formatarData(this.dia5.date)],
-                    ['Sab', this.formatarData(this.dia6.date)],
-                    ['Dom', this.formatarData(this.dia7.date)],
-                ];
-                
-                const dados = [
-                    [this.dia1.sales_value, this.dia1.sales_count],
-                    [this.dia2.sales_value, this.dia2.sales_count],
-                    [this.dia3.sales_value, this.dia3.sales_count],
-                    [this.dia4.sales_value, this.dia4.sales_count],
-                    [this.dia5.sales_value, this.dia5.sales_count],
-                    [this.dia6.sales_value, this.dia6.sales_count],
-                    [this.dia7.sales_value, this.dia7.sales_count],
-                ]
+                // FAZER A LOGICA QUANDO FOR UM DIA ESPECIFICO E NAO UMA SEMANA 
+                if(this.data_min === this.data_max){
 
-            if (this.myChart) {
-                this.myChart.destroy();
-            }
-                        
-            // GRAFICO BARRAS
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var config = {
-                type: 'bar',
-                data: {
-                    labels:labels,
+                    this.data_unica = this.dia1.date
+                    this.bool_dataUn = true
 
-                    datasets: [{
-                        label: 'Vendas',
-                        data: dados,
-                        backgroundColor: '#2B4B88', // Cor de fundo das barras
-                        borderColor: '#2B4B88', // Cor da borda das barras
-                        borderWidth: 1, // Largura da borda das barras
-                        borderRadius:50,
-                        borderSkipped: false,
-                        barThickness: 15,
-                        barPercentage:0.5, 
-                    },
-                
-                ]
-                },
-                plugins: [ChartDataLabels],
-                options: {
-                    skipNull: false,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            offset: true, // Habilita o deslocamento da escala X
-                            grid: {
-                              offset: true // Habilita o deslocamento das linhas de grade
-                            }
-                          },
-                        y: {
-                            max: 5000,
-                            display: false,
-                        },
+                    const labels = [
+                        [this.formatarData(this.dia1.date)],
+                    ];
 
-                    },
-                    
-                    plugins: {
-                        legend: {
-                            display: false
-                        },  
-                        datalabels: {
+                    const dados = [
+                        [this.dia1.sales_value, this.dia1.sales_count],
+                    ]
 
-                            color:'black',
-                            anchor:'end',
-                            align:'end',
-                            offset: 1,
-                            font:{
-                                family: 'Poppins, sans-serif',
-                                weight: 400,
-                                size: 10
+                    if (this.myChart) {
+                        this.myChart.destroy();
+                    }
+                                
+                    // GRAFICO BARRAS
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var config = {
+                        type: 'bar',
+                        data: {
+                            labels:labels,
+        
+                            datasets: [{
+                                label: 'Vendas',
+                                data: dados,
+                                backgroundColor: '#2B4B88', // Cor de fundo das barras
+                                borderColor: '#2B4B88', // Cor da borda das barras
+                                borderWidth: 1, // Largura da borda das barras
+                                borderRadius:50,
+                                borderSkipped: false,
+                                barThickness: 15,
+                                barPercentage:0.5, 
                             },
-                            textAlign: 'center',
-
-                            formatter: function(value, context) {
-                                if(value[1] === 0){
-                                    return ''
+                        
+                        ]
+                        },
+                        plugins: [ChartDataLabels],
+                        options: {
+                            skipNull: false,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    offset: true, // Habilita o deslocamento da escala X
+                                    grid: {
+                                      offset: true // Habilita o deslocamento das linhas de grade
+                                    }
+                                  },
+                                y: {
+                                    max: 2000,
+                                    display: false,
+                                },
+        
+                            },
+                            
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },  
+                                datalabels: {
+        
+                                    color:'black',
+                                    anchor:'end',
+                                    align:'end',
+                                    offset: 1,
+                                    font:{
+                                        family: 'Poppins, sans-serif',
+                                        weight: 400,
+                                        size: 10
+                                    },
+                                    textAlign: 'center',
+        
+                                    formatter: function(value, context) {
+                                        if(value[1] === 0){
+                                            return ''
+                                        }
+                                        var valorFormatado = `R$${value[0]}`;
+                                        var quantidadeVendas = `${value[1]} ven`;
+                                        return `${valorFormatado}\n${quantidadeVendas}`;
+                                      }
                                 }
-                                var valorFormatado = `R$${value[0]}`;
-                                var quantidadeVendas = `${value[1]} ven`;
-                                return `${valorFormatado}\n${quantidadeVendas}`;
-                              }
+                            },
                         }
-                    },
+                    }
+        
+                    if(this.myChart != null){
+                        this.myChart.destroy();
+                    }
+        
+                    this.myChart = new Chart(ctx, config);
+        
+
+                    console.log('Data unica : ' + this.dia1.date)
+
+                // LOGICA QUANDO É UMA SEMANA
+                }else{
+                    const labels = [
+                        ['Seg', this.formatarData(this.dia1.date)],
+                        ['Ter', this.formatarData(this.dia2.date)],
+                        ['Qua', this.formatarData(this.dia3.date)],
+                        ['Qui', this.formatarData(this.dia4.date)],
+                        ['Sex', this.formatarData(this.dia5.date)],
+                        ['Sab', this.formatarData(this.dia6.date)],
+                        ['Dom', this.formatarData(this.dia7.date)],
+                    ];
+                    
+                    const dados = [
+                        [this.dia1.sales_value, this.dia1.sales_count],
+                        [this.dia2.sales_value, this.dia2.sales_count],
+                        [this.dia3.sales_value, this.dia3.sales_count],
+                        [this.dia4.sales_value, this.dia4.sales_count],
+                        [this.dia5.sales_value, this.dia5.sales_count],
+                        [this.dia6.sales_value, this.dia6.sales_count],
+                        [this.dia7.sales_value, this.dia7.sales_count],
+                    ]
+
+                    if (this.myChart) {
+                        this.myChart.destroy();
+                    }
+                                
+                    // GRAFICO BARRAS
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var config = {
+                        type: 'bar',
+                        data: {
+                            labels:labels,
+        
+                            datasets: [{
+                                label: 'Vendas',
+                                data: dados,
+                                backgroundColor: '#2B4B88', // Cor de fundo das barras
+                                borderColor: '#2B4B88', // Cor da borda das barras
+                                borderWidth: 1, // Largura da borda das barras
+                                borderRadius:50,
+                                borderSkipped: false,
+                                barThickness: 15,
+                                barPercentage:0.5, 
+                            },
+                        
+                        ]
+                        },
+                        plugins: [ChartDataLabels],
+                        options: {
+                            skipNull: false,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    offset: true, // Habilita o deslocamento da escala X
+                                    grid: {
+                                      offset: true // Habilita o deslocamento das linhas de grade
+                                    }
+                                  },
+                                y: {
+                                    max: 5000,
+                                    display: false,
+                                },
+        
+                            },
+                            
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },  
+                                datalabels: {
+        
+                                    color:'black',
+                                    anchor:'end',
+                                    align:'end',
+                                    offset: 1,
+                                    font:{
+                                        family: 'Poppins, sans-serif',
+                                        weight: 400,
+                                        size: 10
+                                    },
+                                    textAlign: 'center',
+        
+                                    formatter: function(value, context) {
+                                        if(value[1] === 0){
+                                            return ''
+                                        }
+                                        var valorFormatado = `R$${value[0]}`;
+                                        var quantidadeVendas = `${value[1]} ven`;
+                                        return `${valorFormatado}\n${quantidadeVendas}`;
+                                      }
+                                }
+                            },
+                        }
+                    }
+        
+                    if(this.myChart != null){
+                        this.myChart.destroy();
+                    }
+        
+                    this.myChart = new Chart(ctx, config);
+        
                 }
-            }
 
-            if(this.myChart != null){
-                this.myChart.destroy();
-            }
+                
 
-            this.myChart = new Chart(ctx, config);
-
+            
 
 
             // END GRAFICO BARRA //
