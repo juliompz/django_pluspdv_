@@ -10,7 +10,7 @@
 {% block content %}
 
     <div id="acesso">
-    
+        
         <div class="parte-inicial-azul">
             <div class="saudacao">
                 <div class="title">
@@ -131,7 +131,7 @@
                         </p>
     
                         <p class="card-valor">
-                            R$ ${vendas_totais}
+                            R$ ${formatarDinheiro(vendas_totais)}
                         </p>
     
                         <p class="quantidades-vendidas">
@@ -146,7 +146,7 @@
                         </p>
     
                         <p class="card-valor">
-                            R$ ${desconto_total}
+                            R$ ${formatarDinheiro(desconto_total)}
                         </p>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                             </div>
 
                             <div class="total-de-vendas-valor">
-                                <p>R$ ${vendas_totais}</p>
+                                <p>R$ ${formatarDinheiro(vendas_totais)}</p>
                             </div>
     
                             <div class="qtd-vendas-valor">
@@ -219,7 +219,7 @@
                             </div>
 
                             <div class="valor-total-vendas">
-                                <p>R$ ${venda.sales_value}</p>
+                                <p>R$ ${formatarDinheiro(venda.sales_value) }</p>
                             </div>
 
                             <div class="valor-media">

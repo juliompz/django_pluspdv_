@@ -1,15 +1,11 @@
 
-
-
-
-
 var app = new Vue({
     el: '#acesso',
     delimiters: ['${', '}'],
     data: {
 
         baseUrl: '',
-
+        // PARTE DA SAUDACAO
         cpf: '',
         nomeUsuario: '',
 
@@ -83,6 +79,7 @@ var app = new Vue({
         getUsuario(){
             this.cpf = localStorage.getItem('cpfUser')
             console.log(this.cpf)
+            this.loading = true;
             axios.get(`${this.baseUrl}/api/Cliente?cpf=${this.cpf}`)
             .then(response => {
                 console.log(response.data)
@@ -97,7 +94,10 @@ var app = new Vue({
             axios.get(`${this.baseUrl}/api/Empresa`)
             .then(response => {
                 this.trocar_empresa = response.data
-                console.log(response)                
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
             })
         },
         selectCnpj(cnpj) {
@@ -125,9 +125,12 @@ var app = new Vue({
             })
 
         },
+        // GET DOS DADOS DO TICKET MEDIO
         fetchTicketMedio(){
             axios.get(`http://165.227.177.3:50390/Relatorios/TicketMedio?company_id=1&date_min=${this.data_min}&date_max=${this.data_max}`)
             .then(response => {
+
+
                 this.vendas_totais = response.data.sales_value_total
                 this.quantidades_vendidas = response.data.sales_count_total
                 this.desconto_total = response.data.discount_total
@@ -144,6 +147,7 @@ var app = new Vue({
                 this.dia5 = response.data.dates[4]
                 this.dia6 = response.data.dates[5]
                 this.dia7 = response.data.dates[6]
+
 
                 // FAZER A LOGICA QUANDO FOR UM DIA ESPECIFICO E NAO UMA SEMANA 
                 if(this.data_min === this.data_max){
@@ -223,7 +227,12 @@ var app = new Vue({
                                         if(value[1] === 0){
                                             return ''
                                         }
-                                        var valorFormatado = `R$${value[0]}`;
+                                        function formatDin(value){
+                                            value = value.toLocaleString('pt-br', {minimumFractionDigits: 2})
+                                            return value
+                                        }
+
+                                        var valorFormatado = `R$${formatDin(value[0])}`;
                                         var quantidadeVendas = `${value[1]} ven`;
                                         return `${valorFormatado}\n${quantidadeVendas}`;
                                       }
@@ -307,7 +316,7 @@ var app = new Vue({
                                 },
         
                             },
-                            
+
                             plugins: {
                                 legend: {
                                     display: false
@@ -324,19 +333,25 @@ var app = new Vue({
                                         size: 10
                                     },
                                     textAlign: 'center',
-        
+                                    // FORMATA O DATALABEL  ==  A EXIBICAO DOS DADOS EM CIMA DO GRAFICO
                                     formatter: function(value, context) {
                                         if(value[1] === 0){
                                             return ''
                                         }
-                                        var valorFormatado = `R$${value[0]}`;
+
+                                        function formatDin(value){
+                                            value = value.toLocaleString('pt-br', {minimumFractionDigits: 2})
+                                            return value
+                                        }
+
+                                        var valorFormatado = `R$${formatDin(value[0])}`;
                                         var quantidadeVendas = `${value[1]} ven`;
                                         return `${valorFormatado}\n${quantidadeVendas}`;
                                       }
                                 }
                             },
                         }
-                    }
+                    }                 
         
                     if(this.myChart != null){
                         this.myChart.destroy();
@@ -359,6 +374,7 @@ var app = new Vue({
             this.currentDate = new Date();
             this.renderCalendar();
         },
+        // CODIGO DO CALENDARIO
         renderCalendar() {
 
             this.months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
@@ -427,17 +443,17 @@ var app = new Vue({
             // Atualizar a variável selectedDate
             this.selectedDate = day.date;
 
-            this.data_unica = `${this.currYear}/${this.currMonth}/${this.selectedDate}`
+            this.data_unica = `${this.currYear}/${this.currMonth + 1}/${this.selectedDate}`
 
             this.data_min = this.formatDataUrl(this.data_unica)
             this.data_max = this.formatDataUrl(this.data_unica)
 
             this.fetchTicketMedio()
 
-            console.log(this.formatDataUrl(this.data_unica))
 
             
         },
+        // ALTERAR MES NO CALENDARIO
         alterarMes(flag) {
             if (flag === 'prev') {
                 this.currentDate.setMonth(this.currentDate.getMonth() - 1);
@@ -448,7 +464,7 @@ var app = new Vue({
             }
             this.renderCalendar();
         },
-
+        // DIMINUIR O PERIODO DE DATA PARA EXIBIR NO GRAFICO 
         diminuirData() {
 
             const dataMin = moment(this.data_min, 'YYYY%2FMM%2FDD');
@@ -471,8 +487,10 @@ var app = new Vue({
             }
             
           },
-          aumentarData(){
+        
+          // AUMENTAR O PERIODO DE DATA PARA EXIBIR NO GRAFICO 
 
+            aumentarData(){
             const dataMin = moment(this.data_min, 'YYYY%2FMM%2FDD');
             const dataMax = moment(this.data_max, 'YYYY%2FMM%2FDD');
 
@@ -500,6 +518,13 @@ var app = new Vue({
             const cnpjRegex = /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/;
             return cnpj.replace(cnpjRegex, '$1.$2.$3/$4-$5');
         },
+        formatarDinheiro(din){
+            if (typeof din !== 'number') {
+                return 'Sem valor';
+              }
+            var tmp = din.toFixed(2).replace('.', ',');
+            return tmp.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        }
 
     },
     mounted(){
